@@ -11,7 +11,7 @@ return [
             'cache_dir' => APP_ROOT . 'var/doctrine',
             'metadata_dirs' => [APP_ROOT . 'src/Entities'],
             'connection' => [
-                'driver' => 'pdo_mysql',
+                'driver' => $_ENV['DB_DRIVER'],
                 'host' => $_ENV['DB_HOST'],
                 'port' => $_ENV['DB_PORT'],
                 'dbname' => $_ENV['DB_DATABASE'],
