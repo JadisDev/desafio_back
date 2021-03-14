@@ -20,16 +20,16 @@ class TypeChallenge
     /**
      * @ORM\Column(type="string")
      */
-    private $descripton;
+    private $description;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setDescription(string $descripton): void
+    public function setDescription(string $description): void
     {
-        $this->descripton = $descripton;
+        $this->description = $description;
     }
 
     public function getDescription() : ?string
