@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="type_challenges")
+ * @ORM\Entity(repositoryClass="App\Repositories\TypeChallengeRepository")
  */
 class TypeChallenge
 {
