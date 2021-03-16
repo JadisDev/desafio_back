@@ -1,6 +1,6 @@
 <?php
 
-namespace RegrasPlataformaRegistro\EIdentidade\ValidacaoCustomizada;
+namespace App\Validations\User;
 
 use App\Entities\User;
 use Doctrine\ORM\EntityManager;
@@ -17,7 +17,7 @@ class ValideUserValidator extends ConstraintValidator
 
         $user = $em->getRepository(User::class)->getUserByLogin($value);
 
-        if (!$user) {
+        if ($user) {
             $this->context->addViolation($constraint->message, ['%login%' => $value]);
             return false;
         }

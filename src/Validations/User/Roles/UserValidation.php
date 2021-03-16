@@ -25,7 +25,7 @@ class UserValidation implements ValidationInterface {
             $list = [];
             $validation = Validation::createValidator();
 
-            $list[] = $validation->validate([$data['name']], [
+            $list[] = $validation->validate($data['name'], [
                 new NotBlank(['message' => "nome não informado"]),
                 new Length([
                     'min' => 3,
@@ -35,18 +35,25 @@ class UserValidation implements ValidationInterface {
                 ])
             ]);
 
-            $list[] = $validation->validate([$data['password']], [
-                new NotBlank(['password' => "senha não informado"]),
+            $list[] = $validation->validate($data['password'], [
+                new NotBlank(['message' => "senha não informado"]),
+                new Length([
+                    'min' => 3,
+                    'max' => 10,
+                    'minMessage' => 'Senha deve conter no mínimo {{ limit }} caracteres',
+                    'maxMessage' => 'Senha deve conter no máximo {{ limit }} caracteres',
+                ])
             ]);
 
-            $list[] = $validation->validate([$data['name']], [
+            $list[] = $validation->validate($data['login'], [
                 new NotBlank(['message' => "nome não informado"]),
                 new Length([
                     'min' => 3,
-                    'max' => 100,
-                    'minMessage' => 'Nome deve conter no mínimo {{ limit }} caracteres',
-                    'maxMessage' => 'Nome deve conter no máximo {{ limit }} caracteres',
-                ])
+                    'max' => 6,
+                    'minMessage' => 'Login deve conter no mínimo {{ limit }} caracteres',
+                    'maxMessage' => 'Login deve conter no máximo {{ limit }} caracteres',
+                ]),
+                new ValideUser($this->em)
             ]);
 
             $erros = [];
