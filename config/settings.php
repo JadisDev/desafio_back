@@ -7,7 +7,7 @@ return [
         'displayErrorDetails' => true,
         'determineRouteBeforeAppMiddleware' => false,
         'doctrine' => [
-            'dev_mode' => true,
+            'dev_mode' => $_ENV['DEV_MODE'],
             'cache_dir' => APP_ROOT . 'var/doctrine',
             'metadata_dirs' => [APP_ROOT . 'src/Entities'],
             'connection' => [

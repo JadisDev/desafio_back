@@ -49,9 +49,8 @@ class UserValidation implements ValidationInterface {
                 new NotBlank(['message' => "nome não informado"]),
                 new Length([
                     'min' => 3,
-                    'max' => 6,
-                    'minMessage' => 'Login deve conter no mínimo {{ limit }} caracteres',
-                    'maxMessage' => 'Login deve conter no máximo {{ limit }} caracteres',
+                    'max' => 3,
+                    'exactMessage' => 'Login deve conter exatamente {{ limit }} caracteres',
                 ]),
                 new ValideUser($this->em)
             ]);

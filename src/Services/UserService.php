@@ -7,11 +7,10 @@ use App\Exceptions\ValidationException;
 use App\Validations\User\Roles\UserValidation;
 use DateTime;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserService extends ApiResponse {
 
-    public function saveUser(array $data, EntityManager $em) : JsonResponse
+    public function saveUser(array $data, EntityManager $em) : array
     {
         try {
             $valid = new UserValidation($em);

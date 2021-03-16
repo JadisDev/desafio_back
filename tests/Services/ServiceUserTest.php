@@ -33,7 +33,7 @@ class ServiceUserTest extends EntityManagerTest
             "password" => "123"
         ];
         $userService = new UserService();
-        $resposne = $userService->saveUser($data, $em);
-        $this->assertInstanceOf(JsonResponse::class, $resposne);
+        $response = $userService->saveUser($data, $em);
+        $this->assertIsArray($response);
     }
 }

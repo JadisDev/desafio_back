@@ -4,7 +4,6 @@ namespace App\Entities;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Query\Expr\Func;
 
 /**
  * @ORM\Entity
