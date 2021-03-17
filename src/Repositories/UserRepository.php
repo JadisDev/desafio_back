@@ -12,4 +12,9 @@ class UserRepository extends EntityRepository
         return $this->findOneBy(['login' => $login]);
     }
 
+    public function login(string $login, string $password) : ?User
+    {
+        return $this->findOneBy(['login' => $login, 'password' => $password]);
+    }
+
 }

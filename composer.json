@@ -13,7 +13,8 @@
     "ext-json": "*",
     "symfony/var-dumper": "^5.2",
     "symfony/validator": "^5.2",
-    "symfony/http-foundation": "^5.2"
+    "symfony/http-foundation": "^5.2",
+    "firebase/php-jwt": "^5.2"
   },
   "autoload": {
     "psr-4": {

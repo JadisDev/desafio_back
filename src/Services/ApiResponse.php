@@ -26,6 +26,11 @@ abstract class ApiResponse
         return self::response(500, $message, $data, 500);
     }
 
+    public static function unauthorized( string $message, $data): array
+    {
+        return self::response(401, $message, $data, 401);
+    }
+
     private static function response(int $cod, string $message, $data, $status = 200): array
     {
         return [

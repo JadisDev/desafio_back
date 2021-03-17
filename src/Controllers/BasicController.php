@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use Doctrine\ORM\Query\Expr\Func;
 use Psr\Container\ContainerInterface;
 use Slim\Psr7\Request;
 

@@ -15,3 +15,4 @@ $app->get('/', function (Request $request, ResponseInterface $response) use ($ap
 
 /** Rotas destinada ao usuário */
 $app->post('/users', UserController::class . ':save');
+$app->post('/login', UserController::class . ':login');
