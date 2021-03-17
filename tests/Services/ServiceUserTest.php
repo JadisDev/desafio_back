@@ -5,7 +5,6 @@ namespace App\Tests\Services;
 use App\Entities\User;
 use App\Services\UserService;
 use App\Tests\EntityManagerTest;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -27,7 +26,7 @@ class ServiceUserTest extends EntityManagerTest
      * @param EntityManagerInterface $em
      * @throws Throwable
      */
-    public function x(EntityManagerInterface $em)
+    public function testInsert(EntityManagerInterface $em)
     {
         $data = [
             "name" => "jadis da silva jale",
