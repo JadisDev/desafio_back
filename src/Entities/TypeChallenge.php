@@ -35,6 +35,6 @@ class TypeChallenge
 
     public function getDescription() : ?string
     {
-        return $this->descripton;
+        return $this->description;
     }
 }

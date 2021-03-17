@@ -1,24 +1,20 @@
 <?php
 
-declare(strict_types=1);
-
 use App\Controllers\QuestionController;
 use App\Controllers\UserController;
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface;
 
-$app->get('/', function (Request $request, ResponseInterface $response) use ($app) {
-    $en = $this->get('em');
-    var_dump($en);
-    $response->getBody()->write("Hello Jadis, tudo dando errado como esperado");
-    return $response;
-});
+
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Content-Type");
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 /** Rotas destinada ao usuário */
 $app->post('/users', UserController::class . ':save');
 $app->post('/login', UserController::class . ':login');
 
-// $app->group('/api', function () use ($app) {
-    $app->get('/question-unanswered', QuestionController::class . ':unansweredQuestions');
-    $app->get('/question-answered', QuestionController::class . ':answeredQuestions');
-// });
+$app->get('/api/question-unanswered', QuestionController::class . ':unansweredQuestions');
+$app->get('/api/question-answered', QuestionController::class . ':answeredQuestions');

@@ -20,7 +20,7 @@ function getEntityManager (ContainerInterface $container): EntityManagerInterfac
     $cache = new ArrayCache();
     $config->setProxyNamespace("App\\Proxies\\");
     $config->setQueryCacheImpl($cache);
-    $config->setAutoGenerateProxyClasses(true);
+    $config->setAutoGenerateProxyClasses(false);
 
     $paths = [__DIR__ . '/../src/Entities'];
     $driver = new AnnotationDriver(new AnnotationReader(), $paths);
