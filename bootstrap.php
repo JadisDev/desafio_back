@@ -21,6 +21,6 @@ require __DIR__.'/config/doctrine.php';
 $entityManager = getEntityManager($container);
 $container->set('em', $entityManager);
 
-$app = AppFactory::createFromContainer($container);
+$app = AppFactory::create(null, $container);
 
 require_once "routes.php";
