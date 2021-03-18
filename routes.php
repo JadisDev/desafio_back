@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\GameController;
 use App\Controllers\QuestionController;
 use App\Controllers\UserController;
 use App\Middleware\JwtMiddleware;
@@ -20,9 +21,12 @@ $app->post('/users', UserController::class . ':save');
 $app->post('/login', UserController::class . ':login');
 
 $app->group('/api', function (RouteCollectorProxy $group) {
-    $group->get('/question-unanswered', QuestionController::class . ':unansweredQuestions');
-    $group->get('/question-answered', QuestionController::class . ':answeredQuestions');
-})->add(new JwtMiddleware());
+    $group->get('/questions-unanswered', QuestionController::class . ':unansweredQuestions');
+    $group->get('/questions-answered', QuestionController::class . ':answeredQuestions');
+
+    $group->post('/games', GameController::class . ':save');
+});
+// ->add(new JwtMiddleware());
 
 
 $app->run();

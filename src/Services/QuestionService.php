@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Entities\Alternative;
 use App\Entities\Question;
 use Doctrine\ORM\EntityManager;
-use Exception;
 
 class QuestionService extends ApiResponse {
 
