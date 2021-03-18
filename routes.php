@@ -25,8 +25,9 @@ $app->group('/api', function (RouteCollectorProxy $group) {
     $group->get('/questions-answered', QuestionController::class . ':answeredQuestions');
 
     $group->post('/games', GameController::class . ':save');
-});
-// ->add(new JwtMiddleware());
+})
+// ;
+->add(new JwtMiddleware());
 
 
 $app->run();

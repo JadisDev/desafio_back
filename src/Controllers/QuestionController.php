@@ -18,15 +18,17 @@ class QuestionController extends BasicController
 
     public function answeredQuestions(Request $request, Response $response)
     {
+        $data = $this->getData($request);
         $em = $this->container->get('em');
-        $result = $this->questionService->answeredQuestions(1, $em);
+        $result = $this->questionService->answeredQuestions($data['userId'], $em);
         return $this->returnJson($response, $result);
     }
 
     public function unansweredQuestions(Request $request, Response $response)
     {
+        $data = $this->getData($request);
         $em = $this->container->get('em');
-        $result = $this->questionService->unansweredQuestions(1, $em);
+        $result = $this->questionService->unansweredQuestions($data['userId'], $em);
         return $this->returnJson($response, $result);
     }
 }

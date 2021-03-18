@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Services\UserService;
 use Psr\Container\ContainerInterface;
 use Slim\Psr7\Request;
 
@@ -26,6 +27,15 @@ class BasicController {
 
     public function getData(Request $request)
     {
+        if (isset($request->getHeaders()['Authorization'])) {
+            preg_match('/Bearer\s(\S+)/', $request->getHeaders()['Authorization'][0], $matches);
+            $userService = new UserService();
+            $data = $userService->jwtDecode($matches[1]);
+            $body = json_decode($request->getBody(), true);
+            $body = $body ? $body : [];
+            $newArray = array_merge($body, ['userId' => $data['id']]);
+            return $newArray;
+        }
         return json_decode($request->getBody(), true);
     }
 }

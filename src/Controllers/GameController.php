@@ -19,7 +19,6 @@ class GameController extends BasicController
     public function save(Request $request, Response $response)
     {
         $data = $this->getData($request);
-        $data['userId'] = 1;
         $em = $this->container->get('em');
         $result = $this->gameService->saveGame($data, $em);
         return $this->returnJson($response, $result);

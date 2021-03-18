@@ -2,12 +2,25 @@
 
 namespace App\Middleware;
 
+use App\Services\ApiResponse;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+use Slim\Psr7\Response;
+
 class JwtMiddleware {
 
-    public function __invoke($request, $response)
+   /**
+     * Example middleware invokable class
+     *
+     * @param  ServerRequest  $request PSR-7 request
+     * @param  RequestHandler $handler PSR-15 request handler
+     *
+     * @return Response
+     */
+    public function __invoke(Request $request, RequestHandler $handler): Response
     {
-        // dd($ response);
-        // $response = $next($request, $response);
+        ApiResponse::checkHeadearsAuthorization($request);
+        $response = $handler->handle($request);
         return $response;
     }
 

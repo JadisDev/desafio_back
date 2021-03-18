@@ -23,8 +23,8 @@ class QuestionService extends ApiResponse {
     {
         try {
             $questions = $em->getRepository(Question::class)->unansweredQuestions($userId);
-            $data = $this->toModel($questions, $em, true);
-            return $this->success("Questões repondidas", $data);
+            $data = $this->toModel($questions, $em, false);
+            return $this->success("Questões não repondidas", $data);
         } catch (\Throwable $e) {
             return $this->error("Erro ao obter questões repondidas", $e->getMessage());
         }
@@ -34,25 +34,44 @@ class QuestionService extends ApiResponse {
     {
         $data = [];
 
-        if (count($questions) > 0) {
-            foreach($questions as $question) {
-                $alternatives = $em->getRepository(Alternative::class)->getByQuestion($question->getId());
+        if (count($questions) > 0 && $show) {
+            $data = $this->toModelQuestions($questions, $em, $show);
+        }
 
-                $arrayAlternatives = [];
-                foreach ($alternatives as $alternative) {
-                    $arrayAlternatives[] = [
-                        'id' => $alternative->getId(),
-                        'description' => $alternative->getDescription(),
-                        'isRight' => $show ? $alternative->isRight() : ''
-                    ];
-                }
+        if (count($questions) > 0 && $show === false) {
+            $data = $this->toModelQuestions($questions, $em, $show);
+        }
 
-                $data['questions'][] = [
-                    'type_challenge' => $question->getTypeChallenge()->getDescription(),
-                    'description' => $question->getDescription(),
-                    'alternatives' => $arrayAlternatives
+        if (count($questions) === 0 && false === $show) {
+            $questions = $em->getRepository(Question::class)->findAll();
+            $data = $this->toModelQuestions($questions, $em, $show);
+        }
+
+        return $data;
+    }
+
+    private function toModelQuestions(array $questions, EntityManager $em, bool $show) : array
+    {
+
+        $data = [];
+
+        foreach($questions as $question) {
+            $alternatives = $em->getRepository(Alternative::class)->getByQuestion($question->getId());
+
+            $arrayAlternatives = [];
+            foreach ($alternatives as $alternative) {
+                $arrayAlternatives[] = [
+                    'id' => $alternative->getId(),
+                    'description' => $alternative->getDescription(),
+                    'isRight' => $show ? $alternative->isRight() : ''
                 ];
             }
+
+            $data['questions'][] = [
+                'type_challenge' => $question->getTypeChallenge()->getDescription(),
+                'description' => $question->getDescription(),
+                'alternatives' => $arrayAlternatives
+            ];
         }
 
         return $data;

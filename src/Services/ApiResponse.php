@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
 abstract class ApiResponse
 {
 
@@ -14,7 +15,6 @@ abstract class ApiResponse
     {
         return self::response(422, $message, $data, 422);
     }
-
 
     public static function info(string $message, $data): array
     {
@@ -39,5 +39,26 @@ abstract class ApiResponse
             'data' => $data,
             'status' => $status
         ];
+    }
+
+    public static function checkHeadearsAuthorization(Request $request) 
+    {
+
+        if (!isset($request->getHeaders()['Authorization'])) {
+            header('HTTP/1.0 400 Bad Request');
+            header('Content-Type: application/json');
+            $result = ApiResponse::warning('Rota requer autorização', null);
+            echo json_encode($result);
+            exit;
+        }
+
+        if (!preg_match('/Bearer\s(\S+)/', $request->getHeaders()['Authorization'][0], $matches)) {
+            header('HTTP/1.0 400 Bad Request');
+            header('Content-Type: application/json');
+            $result = ApiResponse::warning('Token não encontrado', null);
+            echo json_encode($result);
+            exit;
+        }
+
     }
 }
