@@ -21,7 +21,7 @@ CREATE TABLE `alternatives` (
   PRIMARY KEY (`id`),
   KEY `alternatives_FK` (`question_id`),
   CONSTRAINT `alternatives_FK` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -30,15 +30,15 @@ CREATE TABLE `users` (
   `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `created_an` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 CREATE TABLE `games` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `question_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `games_FK` (`user_id`),
   KEY `games_user_FK_1` (`question_id`),
-  CONSTRAINT `games_question_FK` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`),
-  CONSTRAINT `games_user_FK_1` FOREIGN KEY (`question_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+  KEY `games_FK` (`user_id`),
+  CONSTRAINT `games_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `games_question_FK` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
