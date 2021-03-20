@@ -44,7 +44,11 @@ class UserService extends ApiResponse {
             );
             if ($user) {
                 $token = $this->jwtEncode($user);
-                return $this->success("Autenticação realizada", $token);
+                $data = [
+                    'token' => $token,
+                    'name' => $user->getName()
+                ];
+                return $this->success("Autenticação realizada", $data);
             }
             throw new Exception('Usuário ou senha incorretos');
         } catch (ValidationException $e) {
@@ -76,6 +80,17 @@ class UserService extends ApiResponse {
             return (array )JWT::decode($jwt, $key, array('HS256'));
         } catch (\Throwable $e) {
             throw $e;
+        }
+    }
+
+    public function ValidJwtDecode($token) : array
+    {
+        try {
+            $data = $this->jwtDecode($token);
+            $data['valid'] = true;
+            return $this->success("Autenticação realizada", $data);
+        } catch (\Throwable $e) {
+            return $this->info("Não foi possível autenticar usuário", $e->getMessage());
         }
     }
 

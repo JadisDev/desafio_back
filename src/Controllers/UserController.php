@@ -31,4 +31,11 @@ class UserController extends BasicController
         $result = $this->userService->saveUser($data, $em);
         return $this->returnJson($response, $result);
     }
+
+    public function validToken(Request $request, Response $response)
+    {
+        $data = $this->getData($request);
+        $result = $this->userService->ValidJwtDecode($data['token']);
+        return $this->returnJson($response, $result);
+    }
 }

@@ -8,6 +8,7 @@ use Slim\Routing\RouteCollectorProxy;
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Headers: *");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -19,11 +20,11 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 /** Rotas destinada ao usuário */
 $app->post('/users', UserController::class . ':save');
 $app->post('/login', UserController::class . ':login');
+$app->post('/validate-token', UserController::class . ':validToken');
 
 $app->group('/api', function (RouteCollectorProxy $group) {
     $group->get('/questions-unanswered', QuestionController::class . ':unansweredQuestions');
     $group->get('/questions-answered', QuestionController::class . ':answeredQuestions');
-
     $group->post('/games', GameController::class . ':save');
 })
 // ;

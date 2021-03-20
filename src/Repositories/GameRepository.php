@@ -14,4 +14,13 @@ class GameRepository extends EntityRepository
             throw $e;
         }
     }
+
+    public function getGameByUser(int $userId)
+    {
+        try {
+            return $this->findBy(['user' => $userId]);
+        } catch (\Throwable $e) {
+            throw $e;
+        }
+    }
 }
