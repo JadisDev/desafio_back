@@ -42,3 +42,38 @@ CREATE TABLE `games` (
   CONSTRAINT `games_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `games_question_FK` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+-- Povoar dados
+
+INSERT INTO desafio.type_challenges (description) VALUES
+	 ('Matemática'),
+	 ('História'),
+	 ('Desenvolvimento');
+
+INSERT INTO desafio.questions (type_challenge_id,description) VALUES
+	 (1,'Quanto é 1 + 1?'),
+	 (1,'Quanto é 10 x 10?'),
+	 (2,'Quando ocorreu a primeira guerra mundial?'),
+	 (2,'Quando ocorreu a segunda guerra mundial?'),
+	 (2,'Qual dia da libertação dos escravos?'),
+	 (3,'Qual desses não é uma linguagem de programação?'),
+	 (3,'Qual desses é sgbd?');
+
+INSERT INTO desafio.alternatives (question_id,description,is_right) VALUES
+	 (1,'Igual a 2',1),
+	 (1,'Igual a 4',0),
+	 (2,'Igual a 99',0),
+	 (2,'Igual a 100',1),
+	 (3,'28 de julho de 1914 – 11 de novembro de 1918',1),
+	 (3,'29 de julho de 1914 – 11 de novembro de 1918',0),
+	 (4,'2 de setembro de 1939 – 2 de setembro de 1945',0),
+	 (4,'1 de setembro de 1939 – 2 de setembro de 1945',1),
+	 (5,'13 de maio',1),
+	 (5,'15 de abril',0);
+INSERT INTO desafio.alternatives (question_id,description,is_right) VALUES
+	 (6,'PHP, JS',1),
+	 (6,'HTML',0),
+	 (7,'Servidor',0),
+	 (7,'Mysql',1);
+

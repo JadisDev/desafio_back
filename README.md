@@ -24,6 +24,7 @@ As extensões do php são basicamente pdo_mysql, curl, mbstring, xml, ou mains a
 - create database desafio, para criar o banco de dados
 - para criar o banco de dados executar o arquivo ddl.sql na IDE de sua preferência ou direto no console. Arquivo localizado na raiz desse projeto.
 - Caso não queria usar docker, deve ser trocado as varáveis de ambientes no .env do projeto de acordo com suas configurações
+- No final do aquivo ddl.sql tem insert inicial das questões e alternativas para ser lançada
 
 ## Apache
 - Na raiz do projeto, copiar arquivo desafio.conf para "/etc/apache2/sites-available". Se necessário trocar caminho da seguinte variáveis no arquivo desafio.conf: DocumentRoot e Directory.
