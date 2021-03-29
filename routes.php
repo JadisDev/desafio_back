@@ -2,6 +2,7 @@
 
 use App\Controllers\GameController;
 use App\Controllers\QuestionController;
+use App\Controllers\TypeController;
 use App\Controllers\UserController;
 use App\Middleware\JwtMiddleware;
 use Slim\Routing\RouteCollectorProxy;
@@ -26,8 +27,8 @@ $app->group('/api', function (RouteCollectorProxy $group) {
     $group->get('/questions-unanswered', QuestionController::class . ':unansweredQuestions');
     $group->get('/questions-answered', QuestionController::class . ':answeredQuestions');
     $group->post('/games', GameController::class . ':save');
+    $group->get('/types', TypeController::class . ':getTypes');
 })
-// ;
 ->add(new JwtMiddleware());
 
 
